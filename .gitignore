@@ -135,3 +135,7 @@ data_test/
 .fuse_hidden*
 __pycache__/
 .fr-*
+## Anything within any directory called __pycache__/
+.*__pycache__/
+## Anything ending in .pyc
+*.pyc
