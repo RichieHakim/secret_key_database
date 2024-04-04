@@ -16,7 +16,7 @@ This approach works great when:
 
 ## Installation
 ```
-pip install secret-key-database
+pip install secret_key_database
 ```
 
 from source:
