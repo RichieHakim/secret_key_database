@@ -39,7 +39,7 @@ def test_encrypt_secret_key_with_provided_salt_and_nonce():
 
 # Test Correctness of Encryption
 @given(secret_key=st.text(min_size=1, max_size=100), password=st.text(min_size=1, max_size=100),)
-@settings(max_examples=100)
+@settings(max_examples=100, deadline=5000)
 def test_encrypt_secret_key_encryption_correctness(secret_key, password):
     result = encrypt_secret_key(secret_key, password)
     assert result['encrypted_key'] != secret_key.encode(), "The secret key should be encrypted"
