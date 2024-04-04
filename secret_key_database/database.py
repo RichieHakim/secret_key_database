@@ -215,7 +215,10 @@ def delete_encrypted_key_from_database(
             provided. Supersedes name if both are provided. Defaults to None.
     """
     _assert_type(path_db, str)  ## Check types: str
-    [_assert_type(var, str) for var in [name, id]]  ## Check types: str
+    if name is not None:
+        _assert_type(name, str)
+    if id is not None:
+        _assert_type(id, str)
 
     # Delete the encrypted key from the database
     with sqlite3.connect(path_db) as conn:
