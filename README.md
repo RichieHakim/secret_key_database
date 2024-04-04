@@ -14,6 +14,18 @@ This approach works great when:
 - You don't want to use an external or cloud service as a key/password manager
 - You need a simple API to store and retrieve keys
 
+## Installation
+```
+pip install secret-key-database
+```
+
+from source:
+```
+git clone https://github.com/RichieHakim/secret_key_database
+cd secret_key_database
+pip install -e .
+```
+
 ## Demo
 ```
 import secret_key_database as skd
