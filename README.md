@@ -34,13 +34,13 @@ path_db = 'path/to/database.db'
 db = skd.database.create_database(path_db)
 
 # Add a new key
-skd.database.append_encrypted_key_to_database(
+skd.user.add_key_to_database(
     path_db=path_db,
     name='key_name',
 )
 
 # Get a key
-key = skd.database.get_decrypted_key_from_database(
+key = skd.user.get_key_from_database(
     path_db=path_db,
     name='key_name',
 )
