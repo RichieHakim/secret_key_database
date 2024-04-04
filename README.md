@@ -1,11 +1,10 @@
 # secret_key_database
-This is a very simple library to encrypt and store secret keys (or any text) locally.
-<br>
+This is a very simple library to encrypt and store secret keys (or any text)
+locally. <br>
 The keys are stored in a local sqlite database. The keys are encrypted using
 AES-GCM. That's it. In theory, the database file can be shared publicly since
-they are encrypted and require a password to decrypt, but it's best to keep it
-private.
-<br>
+the keys are encrypted and require a password to decrypt, but it's best to keep
+it private. <br>
 This approach works great when:
 - Number of keys is small
 - The keys are not very sensitive (e.g. low risk API keys)
@@ -32,7 +31,7 @@ import secret_key_database as skd
 
 # Create a new database
 path_db = 'path/to/database.db'
-db = skd.Database(path_db)
+db = skd.database.create_database(path_db)
 
 # Add a new key
 skd.database.append_encrypted_key_to_database(
