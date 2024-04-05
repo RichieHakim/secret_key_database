@@ -193,7 +193,7 @@ def decrypt_secret_key(
         return decrypted_data.decode()
     except Exception as e:
         # Handle decryption failure (wrong password or data tampering)
-        raise DecryptException("Decryption failed. Wrong password or data tampering.")
+        raise DecryptException(f"Decryption failed. Wrong password or data tampering. \n {e}")
 
 
 class DecryptException(Exception):
