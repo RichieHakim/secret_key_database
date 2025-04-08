@@ -14,6 +14,7 @@ KEYS_DATABASE = {
     "iterations": 'INTEGER NOT NULL',
     "key_length": 'INTEGER NOT NULL',
     "date": 'TEXT NOT NULL',
+    "version": 'TEXT NOT NULL',
     "metadata": 'TEXT',
 }
 
@@ -48,6 +49,7 @@ def append_encrypted_key_to_database(
     iterations: int,
     key_length: int,
     date: Optional[str] = None,
+    version: Optional[str] = None,
     metadata: Optional[str] = None,
 ):
     """
@@ -73,6 +75,8 @@ def append_encrypted_key_to_database(
             The length of the encryption key.
         date (str, optional):
             The date of the encryption. Defaults to None.
+        version (str, optional):
+            The version of secret_key_database. Defaults to None and gathered from defaults.
         metadata (str, optional): 
             Additional metadata about the encryption process. Defaults to None.
     """
@@ -80,9 +84,11 @@ def append_encrypted_key_to_database(
     _assert_type(name, str)  ## Check types: str
     [_assert_type(var, bytes) for var in [encrypted_key, salt, nonce]]  ## Check types: bytes
     _assert_type(algorithm, str)  ## Check types: str
-    _assert_type(date, str) if date is not None else None
     [_assert_int_value(var, min_value=0, max_value=defaults.ITERATIONS*100) for var in [iterations, key_length]]  ## Check values: 0 <= val <= 1000
-
+    _assert_type(date, str) if date is not None else None
+    _assert_type(version, str) if version is not None else None
+    _assert_type(metadata, str) if metadata is not None else None
+    
     # Create a unique ID for the encrypted key
     id = str(uuid.uuid4())
 
@@ -96,6 +102,7 @@ def append_encrypted_key_to_database(
         "iterations": iterations,
         "key_length": key_length,
         "date": date,
+        "version": version,
         "metadata": metadata,
     }
     command = f"INSERT INTO encrypted_keys ({', '.join(KEYS_DATABASE.keys())}) VALUES ({', '.join(['?']*len(KEYS_DATABASE.keys()))})"
@@ -193,6 +200,27 @@ def get_all_data_from_database(path_db: str):
         query = "SELECT * FROM encrypted_keys"
         results = conn.execute(query).fetchall()
         return [dict(zip(KEYS_DATABASE.keys(), result)) for result in results]
+    
+def get_names_from_database(path_db: str):
+    """
+    Retrieves all names from a SQLite database. \n
+    RH 2024
+
+    Args:
+        path_db (str): 
+            The path to the database file.
+
+    Returns:
+        (list):
+            A list of names of the encrypted keys in the database.
+    """
+    _assert_type(path_db, str)  ## Check types: str
+
+    # Query the database for all names
+    with sqlite3.connect(path_db) as conn:
+        query = "SELECT name FROM encrypted_keys"
+        results = conn.execute(query).fetchall()
+        return [result[0] for result in results]
     
 
 def delete_encrypted_key_from_database(

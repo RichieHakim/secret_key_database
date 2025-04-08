@@ -77,7 +77,8 @@ def add_key_to_database(
             The password to use for encryption. If not provided, the user will
             be prompted to enter it. Defaults to None.
         metadata (str, optional): 
-            Additional metadata about the encryption process. Defaults to None.
+            Additional information about the encryption process. Defaults to None.
+            You can write notes in here about the secret key.
         **kwargs_encrypt_secret_key:
             Additional keyword arguments for the encryption process.
     """

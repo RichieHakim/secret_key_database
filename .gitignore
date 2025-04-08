@@ -139,3 +139,7 @@ __pycache__/
 .*__pycache__/
 ## Anything ending in .pyc
 *.pyc
+
+
+## custom
+*.db

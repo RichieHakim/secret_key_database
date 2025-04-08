@@ -44,4 +44,7 @@ key = skd.user.get_key_from_database(
     path_db=path_db,
     name='key_name',
 )
+
+# Check out available keys by name
+print(skd.database.get_names_from_database(path_db=path_db))
 ```

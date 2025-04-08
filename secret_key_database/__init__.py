@@ -6,5 +6,8 @@ __all__ = [
 
 for pkg in __all__:
     exec('from . import ' + pkg)
+    
+## lift everything in user module to the package level
+from .user import *
 
-__version__ = '0.1.2'
+__version__ = '0.1.3'

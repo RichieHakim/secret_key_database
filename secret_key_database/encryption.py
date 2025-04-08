@@ -31,6 +31,7 @@ from cryptography.hazmat.primitives import hashes
 from cryptography.hazmat.primitives.ciphers.aead import AESGCM
 from cryptography.hazmat.backends import default_backend
 
+from .__init__ import __version__
 
 ## Set default constants
 class defaults:
@@ -126,6 +127,7 @@ def encrypt_secret_key(
         "key_length": key_length,
         "algorithm": algorithm,
         "date": date,
+        "version": __version__,
     }
 
 
