@@ -31,8 +31,6 @@ from cryptography.hazmat.primitives import hashes
 from cryptography.hazmat.primitives.ciphers.aead import AESGCM
 from cryptography.hazmat.backends import default_backend
 
-from .__init__ import __version__
-
 ## Set default constants
 class defaults:
     SALT_LENGTH = 16
@@ -119,6 +117,7 @@ def encrypt_secret_key(
     # Return the encrypted key, salt, and encryption parameters
     algorithm = "PBKDF2HMAC-SHA256, AES-GCM"
     date = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+    from .__init__ import __version__
     return {
         "encrypted_key": encrypted_key,
         "salt": salt,
